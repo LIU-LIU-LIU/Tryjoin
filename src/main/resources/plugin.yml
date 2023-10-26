@@ -1,0 +1,5 @@
+name: Tryjoin
+version: ${project.version}
+main: cc.ahaly.mc.tryjoin.Tryjoin
+description: bc端子服关闭自动回到备用服务器
+author: AHA
