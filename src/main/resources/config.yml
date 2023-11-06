@@ -1,0 +1,2 @@
+#配置备用服务器名称(服务器名称是在bungee配置文件中写的名称)
+serverName: "login"
