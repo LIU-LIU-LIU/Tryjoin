@@ -11,15 +11,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class Tryjoin extends Plugin implements Listener {
-    public static String serverName = "login";
+    public static String serverName;
+    public static String excludedServerKickEvents;
 
     @Override
     public void onEnable() {
         Configuration config = loadConfig();
 
         serverName = config.getString("serverName", "login");
+        excludedServerKickEvents = config.getString("excludedServerKickEvents", "main");
 
         // Plugin startup logic
         getLogger().info("tryjoin插件已经启用");
@@ -33,8 +36,20 @@ public class Tryjoin extends Plugin implements Listener {
     }
     @EventHandler()
     public void onServerKick(ServerKickEvent e) {
-        e.setCancelled(true);
-        e.setCancelServer(getProxy().getServerInfo(serverName));
+        String[] excludedServers = excludedServerKickEvents.split(",");
+
+        // 判断被踢出的服务器是否在排除列表中
+        for (String excludedServer : excludedServers) {
+            if (Objects.equals(e.getKickedFrom().getName(), excludedServer.trim())) {
+                return; // 如果在排除列表中，不执行任何操作
+            }
+        }
+
+        // 判断被踢出的服务器是否是配置的特定服务器
+        if (!Objects.equals(e.getKickedFrom().getName(), serverName)) {
+            e.setCancelled(true);
+            e.setCancelServer(getProxy().getServerInfo(serverName));
+        }
     }
 
 

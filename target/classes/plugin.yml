@@ -1,5 +1,5 @@
 name: Tryjoin
-version: 1.0-SNAPSHOT
+version: 1.2-SNAPSHOT
 main: cc.ahaly.mc.tryjoin.Tryjoin
-description: bc端子服关闭自动回到备用服务器
+description: bc端子服关闭回到指定服务器
 author: AHA

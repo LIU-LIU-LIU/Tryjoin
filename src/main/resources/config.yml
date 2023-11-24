@@ -1,2 +1,6 @@
 #配置备用服务器名称(服务器名称是在bungee配置文件中写的名称)
 serverName: "login"
+
+#不处理哪些服务器的踢出事件,多个使用","分隔
+#excludedServerKickEvents: "main，su,mod"
+excludedServerKickEvents: "main"
